@@ -24,7 +24,7 @@ Then open http://localhost:8000. You can also double-click `index.html`.
 ## Deploy to GitHub Pages
 
 1. Create a public repo on GitHub named **`<your-username>.github.io`**
-   (for example `22f2000834.github.io`).
+   (for example `mohammaddalwai.github.io`).
 2. Push this folder to it:
    ```bash
    git init

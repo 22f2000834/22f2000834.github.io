@@ -26,7 +26,7 @@ window.PORTFOLIO = {
   links: {
     email: "mohammaddalwai@gmail.com",
     linkedin: "https://www.linkedin.com/in/mohammad-dalwai-18b5a6201/",
-    github: "https://github.com/22f2000834",
+    github: "https://github.com/mohammaddalwai",
     resume: "assets/resume.pdf",
   },
 
