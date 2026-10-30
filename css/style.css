@@ -617,6 +617,12 @@ button { font: inherit; color: inherit; }
   font-size: 12px;
   color: var(--muted);
 }
+.project-featured { grid-column: 1 / -1; border-color: var(--accent); }
+.project-featured:hover { border-color: var(--accent); }
+.project-featured h3 { font-size: 1.45rem; }
+@media (min-width: 768px) {
+  .project-featured .bullets { grid-template-columns: 1fr 1fr; gap: 10px 32px; }
+}
 .project h3 { font-size: 1.2rem; font-weight: 600; }
 .project-summary { color: var(--text-soft); }
 

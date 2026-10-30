@@ -21,7 +21,7 @@ window.PORTFOLIO = {
   ],
 
   tagline:
-    "I build machine learning systems end to end, from feature engineering and model comparison to apps people can actually use.",
+    "I build and ship machine learning systems across speech, computer vision, and document AI, and I test them hard enough to know where they break.",
 
   links: {
     email: "mohammaddalwai@gmail.com",
@@ -36,31 +36,34 @@ window.PORTFOLIO = {
     program: "MS, Data Science",
     school: "Arizona State University",
     gpa: 4.0,
-    focus: ["ML", "Computer Vision", "Speech"],
+    focus: ["ML", "Vision", "Speech"],
+    latest: "Whisper fine-tuning",
     status: "open to opportunities",
   },
 
   stats: [
     { value: "4.0", label: "GPA at ASU" },
-    { value: "2", label: "peer-reviewed publications" },
-    { value: "~18%", label: "word error rate on accented ASR" },
+    { value: "2", label: "published papers" },
+    { value: "16.3%", label: "word error rate on unseen speakers, down from 22.5%" },
     { value: "May '27", label: "expected graduation" },
   ],
 
   about: [
     "I'm a Master's student in Data Science at Arizona State University (4.0 GPA, graduating May 2027), with a B.Tech in Computer Science and Business Systems from Bharati Vidyapeeth, Mumbai.",
-    "My work spans computer vision, speech recognition, and predictive modeling. I've built a CNN-based eye disease screening tool, a speech recognizer for Indian-accented English, and a loan-risk pipeline designed to be interpretable. I care about models that are accurate and explainable, and about shipping them as tools people can use.",
+    "Most recently, I fine-tuned Whisper for accented conversational English, measured it on speakers it had never heard, and deployed it as a public demo. I've also built a retinal image classifier, a document pipeline for pharmaceutical records, and a loan-risk model explained with SHAP. I care about results that hold up: locked test sets, confidence intervals, and honest limitations.",
     // Edit or remove this line to match what you're looking for
     "I'm currently looking for data science and machine learning internships and roles.",
   ],
 
   skills: [
     { group: "Languages", items: ["Python", "SQL", "Java"] },
-    { group: "Machine Learning", items: ["scikit-learn", "XGBoost", "SHAP", "Clustering", "NLP"] },
-    { group: "Deep Learning & CV", items: ["CNNs (MobileNetV2)", "OpenCV", "Speech recognition"] },
+    { group: "Machine Learning", items: ["scikit-learn", "XGBoost", "LightGBM", "SHAP", "Clustering", "NLP"] },
+    { group: "Deep Learning", items: ["PyTorch", "Hugging Face Transformers", "TensorFlow/Keras", "Transfer learning", "Mixed-precision training"] },
+    { group: "Speech, Vision & Documents", items: ["Whisper", "Speech recognition", "OpenCV", "MobileNetV2", "RAG", "LlamaIndex"] },
+    { group: "Evaluation", items: ["Word error rate", "Bootstrap intervals", "Multi-seed experiments", "Error analysis", "Precision, recall, F1"] },
     { group: "Data & Visualization", items: ["Pandas", "NumPy", "Matplotlib", "Tableau"] },
-    { group: "Databases", items: ["MySQL", "PostgreSQL"] },
-    { group: "Tools", items: ["Jupyter", "Git", "VS Code", "PyCharm", "MySQL Workbench", "Flask", "Tkinter"] },
+    { group: "Databases", items: ["MySQL", "PostgreSQL", "SQLite"] },
+    { group: "Deployment & Tools", items: ["FastAPI", "Docker", "GitHub Actions", "Flask", "Git", "Jupyter", "Google Colab"] },
   ],
 
   certifications: [
@@ -75,42 +78,65 @@ window.PORTFOLIO = {
   ],
 
   // categories drive the filter chips; tags show on each card.
-  // links: github / demo / paper. Leave "" to hide.
+  // links: demo / github / model / paper. Leave "" to hide.
+  // featured: true makes a card full width. Use it on one project.
   projects: [
     {
-      title: "Multiple Eye Disease Detection",
-      period: "Fall 2023",
-      org: "Bharati Vidyapeeth (DU) DET",
-      categories: ["Computer Vision", "Deep Learning"],
+      title: "Fine-Tuning Whisper for Accented English",
+      period: "Fall 2026",
+      org: "Arizona State University",
+      featured: true,
+      categories: ["Speech", "Deep Learning"],
       summary:
-        "A deep learning system that screens retinal images for cataract, glaucoma, and diabetic retinopathy.",
+        "I fine-tuned OpenAI's Whisper-small (244M parameters) on 15.9 hours of real video-call conversations across many English accents, tested it on speakers it had never heard, and shipped it as a CPU web service.",
       highlights: [
-        "Used a MobileNetV2 CNN for efficient feature extraction and classification.",
-        "Improved generalization with image preprocessing and data augmentation.",
-        "Built a Flask web app for real-time image upload and prediction.",
+        "Cut word error rate from 22.5% to 16.3% on 28 unseen speakers (95% interval for the gain: 4.2 to 8.7 points). All 3 seeds landed between 16.3% and 17.1%.",
+        "Found that fine-tuning hurt read speech, then mixed 15% LibriSpeech clips back into training, which cut that damage by more than half.",
+        "Separated real gains from transcription style: 2 to 3 points hold after controlling for it. On that measure, the much larger large-v3-turbo ties or slightly beats it.",
+        "Caught a padding bug with a conversion check, then deployed a 253 MB int8 model using FastAPI and Docker, with 47 automated tests.",
       ],
-      result: "Published at ICICCT-2024",
-      tags: ["Python", "MobileNetV2", "CNN", "Flask"],
+      result: "16.3% word error rate on unseen speakers, down from 22.5%",
+      tags: ["PyTorch", "Whisper", "Hugging Face", "FastAPI", "Docker"],
       links: {
-        github: "",
-        demo: "",
-        paper: "https://docs.google.com/document/d/1JsJTcjzSLB0P99B9rA1wsvkD85L2Eaka/edit?usp=sharing&ouid=103370580876521542473&rtpof=true&sd=true",
+        demo: "https://huggingface.co/spaces/mddalwai/whisper-small-edacc-demo",
+        github: "https://github.com/mohammaddalwai/speech-ft",
+        model: "https://huggingface.co/mddalwai/whisper-small-edacc",
       },
     },
     {
-      title: "Speech Recognition for Indian-Accented English",
-      period: "Feb – Apr 2022",
-      org: "Languify · AI Trainee",
-      categories: ["Speech", "Deep Learning"],
+      title: "Multiple Eye Disease Detection",
+      period: "Fall 2023, rebuilt 2026",
+      org: "Bharati Vidyapeeth (DU) DET",
+      categories: ["Computer Vision", "Deep Learning"],
       summary:
-        "An automatic speech recognition (ASR) system that combines acoustic and language modeling to transcribe Indian-accented English.",
+        "A CNN web app that sorts retinal images into 5 classes: cataract, diabetic retinopathy, glaucoma, normal, and other. It's a research demo, not medical advice.",
       highlights: [
-        "Implemented MFCC feature extraction, HMM decomposition, and ANN-based acoustic modeling.",
-        "Trained and evaluated models on a custom dataset of 500+ audio recordings.",
+        "Fine-tuned MobileNetV2 with transfer learning in TensorFlow/Keras on 1,000+ images from 4 public datasets.",
+        "Used data augmentation to address class imbalance between healthy and diseased samples.",
+        "Rebuilt the Flask app with Docker, input validation, automated tests, and GitHub Actions CI, then deployed a public demo.",
       ],
-      result: "WER ≈ 18%, about 15% better recognition accuracy",
-      tags: ["Python", "MFCC", "HMM", "Neural networks"],
-      links: { github: "", demo: "", paper: "" },
+      result: "Published at ICICCT-2024",
+      tags: ["TensorFlow/Keras", "MobileNetV2", "Flask", "Docker"],
+      links: {
+        demo: "https://huggingface.co/spaces/mddalwai/eye-detection",
+        github: "https://github.com/mohammaddalwai/Multiple-eye-disease-detection-using-machine-learning",
+      },
+    },
+    {
+      title: "Document Intelligence for Pharma Records",
+      period: "Fall 2026",
+      org: "Extern × Pfizer AI externship",
+      categories: ["Document AI"],
+      summary:
+        "A pipeline that reads pharmaceutical supplier documents, splits mixed PDFs into individual records, and answers questions about them using retrieval.",
+      highlights: [
+        "Segmented mixed PDFs with Qwen2.5-3B-Instruct, using separate prompts for document type and document boundaries, plus keyword fallback rules.",
+        "Labeled all 10 pages of a sample PDF correctly against a hand-built answer key, compared with 90% for the model alone.",
+        "Fed the extracted metadata into LlamaIndex for filtered retrieval.",
+      ],
+      result: "",
+      tags: ["Python", "LlamaIndex", "RAG", "Qwen2.5"],
+      links: {},
     },
     {
       title: "Loan Approval Prediction",
@@ -120,13 +146,43 @@ window.PORTFOLIO = {
       summary:
         "A machine learning pipeline that scores loan applications for risk and flags applicants likely to default.",
       highlights: [
-        "Compared multiple models and analyzed feature importance to explain what drives approval risk.",
-        "Engineered risk features that improved detection of likely defaulters.",
+        "Compared multiple models and engineered risk features that improved detection of likely defaulters.",
+        "Grouped applicants into risk cohorts and explained the drivers with SHAP.",
         "Designed to help lenders reduce default exposure and prioritize manual reviews.",
       ],
       result: "",
-      tags: ["Python", "Pandas", "Classification", "Feature engineering"],
-      links: { github: "", demo: "", paper: "" },
+      tags: ["Python", "Pandas", "SHAP", "Feature engineering"],
+      links: {},
+    },
+    {
+      title: "Placement Portal",
+      period: "2026",
+      org: "Full-stack web app",
+      categories: ["Web Apps"],
+      summary:
+        "A campus recruitment app with separate roles for admins, companies, and students.",
+      highlights: [
+        "Admins approve companies and placement drives, and can search and blacklist accounts.",
+        "Companies post drives and review applicants. Students upload resumes, apply, and track their applications.",
+      ],
+      result: "",
+      tags: ["Flask", "SQLAlchemy", "SQLite", "Jinja2"],
+      links: { github: "https://github.com/mohammaddalwai/Placement-Portal-Application" },
+    },
+    {
+      title: "Speech Recognition for Indian-Accented English",
+      period: "Feb – Apr 2022",
+      org: "Languify AI · AI Trainee",
+      categories: ["Speech", "Deep Learning"],
+      summary:
+        "An automatic speech recognition (ASR) system that combines acoustic and language modeling to transcribe Indian-accented English.",
+      highlights: [
+        "Implemented MFCC feature extraction, HMM decomposition, and ANN-based acoustic modeling.",
+        "Trained and evaluated models on a custom dataset of 500+ audio recordings.",
+      ],
+      result: "WER ≈ 18%, about 15% better recognition accuracy",
+      tags: ["Python", "MFCC", "HMM", "Neural networks"],
+      links: {},
     },
     {
       title: "Automated Attendance with Facial Recognition",
@@ -139,8 +195,6 @@ window.PORTFOLIO = {
       result: "Published in IJ-AI, Vol. 13, No. 1 (2024)",
       tags: ["Python", "Computer vision", "Face recognition"],
       links: {
-        github: "",
-        demo: "",
         paper: "https://drive.google.com/file/d/1tR0UUE2Gv0oIrv5kYg4TmmeCcY1DyOAr/view?usp=sharing",
       },
     },
@@ -186,7 +240,7 @@ window.PORTFOLIO = {
     {
       type: "work",
       title: "Artificial Intelligence Trainee",
-      org: "Languify",
+      org: "Languify AI",
       location: "Mumbai, India",
       date: "Feb 2022 – Apr 2022",
       bullets: [
@@ -208,7 +262,7 @@ window.PORTFOLIO = {
       title: "Multiple Eye Disease Detection Using Machine Learning",
       venue: "International Conference on Intelligent Computing and Communication Techniques (ICICCT-2024)",
       date: "June 2024",
-      url: "https://docs.google.com/document/d/1JsJTcjzSLB0P99B9rA1wsvkD85L2Eaka/edit?usp=sharing&ouid=103370580876521542473&rtpof=true&sd=true",
+      url: "", // add the paper link here to show "Read paper"
     },
   ],
 };

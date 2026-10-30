@@ -18,6 +18,8 @@
       '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg>',
     paper:
       '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V2H6.5A2.5 2.5 0 0 0 4 4.5v15Z"/><path d="M6.5 17A2.5 2.5 0 0 0 4 19.5 2.5 2.5 0 0 0 6.5 22H20v-5"/></svg>',
+    box:
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8v8l9 5 9-5V8Z"/><path d="m3 8 9 5 9-5M12 13v8"/></svg>',
     award:
       '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.48 12.89 17 22l-5-3-5 3 1.52-9.11"/></svg>',
     code:
@@ -47,6 +49,7 @@
     "Computer Vision": "eye",
     Speech: "wave",
     "Predictive Modeling": "chart",
+    "Document AI": "paper",
   };
 
   // Tiny DOM builder: string children become text nodes, so content is never parsed as HTML
@@ -183,8 +186,9 @@
   function renderProjects() {
     const grid = $("project-grid");
     const linkDefs = [
-      ["github", "Code", "github"],
       ["demo", "Demo", "external"],
+      ["github", "Code", "github"],
+      ["model", "Model", "box"],
       ["paper", "Paper", "paper"],
     ];
 
@@ -197,7 +201,7 @@
 
       return h(
         "article",
-        { class: "card project reveal", "data-cats": p.categories.join("|") },
+        { class: "card project reveal" + (p.featured ? " project-featured" : ""), "data-cats": p.categories.join("|") },
         h(
           "div",
           { class: "project-top" },

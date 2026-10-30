@@ -8,7 +8,8 @@ A fast, dependency-free personal portfolio built with plain HTML, CSS, and JavaS
 experience, publications, and links there. You don't need to touch the HTML.
 
 - **Add a project:** copy one object in `projects` and edit it. `categories` drive the
-  filter chips; `links.github` / `links.demo` / `links.paper` show buttons when not empty.
+  filter chips; `links.demo` / `links.github` / `links.model` / `links.paper` show buttons
+  when not empty. Add `featured: true` to make one card full width.
 - **Update your resume:** replace `assets/resume.pdf` (keep the same filename).
 - **Hero code card:** edit `profileCard`.
 - **Typing effect:** edit `roles`.
